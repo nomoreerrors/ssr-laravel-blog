@@ -8,7 +8,7 @@ use App\Models\BlogPosts;
 
 
 
-class PostController extends BaseBlogController
+class PostController extends BaseController
 {
     /**
      * Display a listing of the resource.

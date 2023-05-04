@@ -5,15 +5,19 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Blog\Admin\BaseCategoryController;
+use App\Models\BlogCategories;
 
-class BlogCategoryController extends Controller
+class BlogCategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+
+        $blogCategories = BlogCategories::paginate(5);
+        return view('blog.admin.category.index', compact('blogCategories'));
     }
 
     /**
@@ -21,7 +25,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -29,7 +33,7 @@ class BlogCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -37,7 +41,7 @@ class BlogCategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -45,7 +49,10 @@ class BlogCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+         $item = BlogCategories::findOrFail($id);
+         $categoryList = BlogCategories::all();
+
+         return view('blog.admin.category.edit', compact('item','categoryList'));
     }
 
     /**
@@ -53,7 +60,9 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $item = BlogCategories::findOrFail($id);
+        $categoryList = BlogCategories::all();
+        return view('blog.admin.category.update', compact('item','categoryList'));
     }
 
     /**

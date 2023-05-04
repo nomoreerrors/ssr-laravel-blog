@@ -37,10 +37,10 @@ Route::prefix('blog')->group(function () {
 });
 
 //админка
-Route::prefix('admin/blog')->group(function () {
-        Route::resource('categories', BlogCategoryController::class)
-                                    ->names('blog.admin.categories')
-                                    ->only('index', 'edit', 'store', 'update', 'create');
+Route::prefix('blog/admin')->group(function () {
+        Route::resource('category', BlogCategoryController::class)
+                                        ->names('blog.admin.category')
+                                        ->only('index', 'edit', 'store', 'update', 'create');
 
 });
 
