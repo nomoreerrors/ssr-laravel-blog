@@ -16,7 +16,7 @@ class BlogCategoryController extends BaseController
     public function index()
     {
 
-        $blogCategories = BlogCategories::paginate(5);
+        $blogCategories = BlogCategories::paginate(10);
         return view('blog.admin.category.index', compact('blogCategories'));
     }
 

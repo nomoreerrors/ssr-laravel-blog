@@ -1,32 +1,11 @@
 <x-app-layout>
   
-    <style>
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+   {{-- Страница списка категорий блога--}}
 
-        }
-        .add-btn {
-            background-color: #04a8d1;
-            border-radius: 5px;
-            padding: 5px;
-        }
-        .page-table {
-            width: 600px;
-        }
-        td {
-            text-align: center;
-        }
-    </style>
+<div class='p-10'>
+    <div class="flex items-center text-2xl">
 
-
-<div class='wrapper'>
-    <div>
-    <nav>
-        <a class="add-btn" href="{{ route('blog.admin.category.create') }}">Добавить</a>
-    </nav>
-    <table class="page-table">
+    <table class="border-separate my-table-spacing text-center">
 
         <thead>
             <th>#</th>
@@ -37,7 +16,7 @@
             @foreach($blogCategories as $category)
                 @php /** var \App\Models\BlogCategories $category */ @endphp
                 
-                    <tr>
+                    <tr >
                         <td>{{ $category->id }}</td>
                         <td>
                             <a href="{{ route('blog.admin.category.edit', $category->id)}}">{{ $category->title }}</a>
@@ -51,15 +30,22 @@
 
             @endforeach
         </tbody>
-
+        
     </table>
+
+        <a class="bg-purple-500 p-5 rounded-lg relative " href="{{ route('blog.admin.category.create') }}">Добавить</a>
+
     </div>
-    @if($blogCategories->total() > $blogCategories->count())
-        <br>
-        <div style="display:flex; justify-content:space-around">
-            {{ $blogCategories->links() }}
+    
+
+            {{-- Если в базе категорий станет меньше, чем мы установили в пагинации, то ссылки на страницы исчезнут --}}
+            @if($blogCategories->total() > $blogCategories->count())
+                <br>
+                <div >
+
+                    {{ $blogCategories->links() }}
+                </div>
+            @endif
         </div>
-    @endif
-</div>
 
 </x-app-layout>

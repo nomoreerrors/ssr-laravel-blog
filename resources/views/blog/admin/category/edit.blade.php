@@ -2,21 +2,37 @@
     @php /** @var \App\Models\BlogCategories $item */ @endphp
     @php /** @var \App\Models\BlogCategories $categoryList */ @endphp
 
+    {{-- @php  $cuddy = ['lolwut', 'cameron', 'house', 'melrstroy'];
+                unset($cuddy[1]) --}}
+    
+    @endphp
+    {{ dd($cuddy) }}
+                
                 <x-slot name="header">
                     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         {{ __('Profile') }}
                     </h2>
                 </x-slot>
 
-                <div class="py-12">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
 
-                            <x-edit-category-component :propsArray="compact('item', 'categoryList')"/>
+                {{-- Страница редактирования категорий --}}
+                <div class=" flex gap-column gap-x-10 mt-10 border border-gray-200  rounded-lg h-3/5 " >
+                        
+                        <form method="POST"
+                              action="{{ route('blog.admin.category.update', $item->id )}}"
+                              class=" flex flex-col w-3/5 m-5">
+                                    @method('PATCH')
+                                    @csrf
 
-                            </div>
-                        </div>
+                              @include('blog.admin.category.includes.edit-category-inputs')
+                        </form>
+
+                        
+                               @include('blog.admin.category.includes.edit-category-info-col')
+
+               
                     </div>
-                </div>
 
-</x-app-layout>
+            </x-app-layout>
+
+            
