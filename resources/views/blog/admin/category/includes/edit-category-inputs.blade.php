@@ -1,4 +1,5 @@
 
+<div class="flex flex-col w-3/5 m-5">
 
         {{-- Заголовок --}}
         <label for="title">Заголовок</label>
@@ -19,11 +20,8 @@
                       value="{{ $item->slug }}"
                       type="text"
                       minlength="3"
-                      required
                       class="mb-4"/>
                       
-
-
 
 
 
@@ -46,11 +44,14 @@
 
 
         {{-- Описание --}}
-        <label for="description">Описание</label>
-            <textarea name="description"rows="3">{{ $item->description }}</textarea>
-            
+        <label for="description">Описание</label> 
+            <textarea name="description"rows="3">{{ old('description', $item->description) }}</textarea>
+                        {{-- old = helper laravel --}}
 
 
+
+                        
+  </div>
 
 
    

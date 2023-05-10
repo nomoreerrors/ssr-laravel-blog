@@ -5,14 +5,14 @@
 
 
            <div class="flex-1  bg-green-200 flex justify-center items-center">
-                <x-primary-button >
-                    Click here
+                <x-primary-button type="submit">
+                    Отправить
                 </x-primary-button>
            </div>
 
 
 
-@if($item->exists())
+@if($item->exists)
 
            <div class="flex-1 bg-blue-400 flex justify-center items-center  " >
                ID: {{ $item->id }}

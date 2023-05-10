@@ -6,7 +6,10 @@ namespace App\Http\Controllers\Blog\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Blog\Admin\BaseCategoryController;
+use App\Http\Requests\BlogCategoryCreateRequest;
+use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategories;
+use Illuminate\Support\Str;
 
 class BlogCategoryController extends BaseController
 {
@@ -23,17 +26,28 @@ class BlogCategoryController extends BaseController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(BlogCategories $item)
     {
-        echo __METHOD__;
+
+        $categoryList = BlogCategories::all();
+        return view('blog.admin.category.edit', 
+                    compact('item', 'categoryList' ));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogCategoryCreateRequest $request)
     {
-        echo __METHOD__;
+        $data = $request->input();
+        //take info from inputs only
+
+        if(empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+        dd($data);
     }
 
     /**
@@ -58,11 +72,26 @@ class BlogCategoryController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $item = BlogCategories::findOrFail($id);
-        $categoryList = BlogCategories::all();
-        return view('blog.admin.category.update', compact('item','categoryList'));
+    public function update(BlogCategoryUpdateRequest $request, string $id)
+    {       
+
+            $item = BlogCategories::find($id);
+            
+            if(!$item) return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
+                                     ->withInput();
+            
+            
+            $data = $request->all();
+            $result = $item->fill($data)
+                            ->save();
+            //save возвращает bool
+            
+            if($result) return redirect()
+                                    ->route('blog.admin.category.edit', $item->id)
+                                    ->with(['success' => "Успешно сохранено"]);
+            else return back()
+                            ->withErrors(['msg' => 'Ошибка сохранения'])
+                            ->withInput();
     }
 
     /**

@@ -29,7 +29,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class=" mx-auto w-3/5 h-screen">
+            <main class=" mx-auto w-3/5 h-96">
                 {{ $slot }}
             </main>
         </div>
