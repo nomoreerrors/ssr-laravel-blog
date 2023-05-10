@@ -28,7 +28,7 @@ class BlogCategoryController extends BaseController
      */
     public function create(BlogCategories $item)
     {
-
+        
         $categoryList = BlogCategories::all();
         return view('blog.admin.category.edit', 
                     compact('item', 'categoryList' ));
@@ -40,14 +40,18 @@ class BlogCategoryController extends BaseController
      */
     public function store(BlogCategoryCreateRequest $request)
     {
-        $data = $request->input();
-        //take info from inputs only
-
+        $data = $request->input();  
         if(empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
         }
 
-        dd($data);
+        $item = new BlogCategories($data);
+        $item->save();
+        
+
+        if($item) return redirect()->route('blog.admin.category.edit', $item->id);
+        else back()->withErrors(['msg' => 'Ошибка сохранения в Store'])
+                    ->withInput();
     }
 
     /**
@@ -77,13 +81,22 @@ class BlogCategoryController extends BaseController
 
             $item = BlogCategories::find($id);
             
+            
             if(!$item) return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
                                      ->withInput();
             
             
             $data = $request->all();
-            $result = $item->fill($data)
-                            ->save();
+
+            if(empty($data['slug'])) {
+                $data['slug'] = Str::slug($data['title']);
+            }
+            
+            $result = $item->update($data);
+            //update включает метод fill & save
+            // $result = $item->fill($data)
+            //                 ->save();
+            //второй способ
             //save возвращает bool
             
             if($result) return redirect()

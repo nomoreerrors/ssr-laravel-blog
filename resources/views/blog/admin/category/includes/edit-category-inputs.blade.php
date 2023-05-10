@@ -4,7 +4,7 @@
         {{-- Заголовок --}}
         <label for="title">Заголовок</label>
         <x-text-input name="title"
-                      value="{{ $item->title }}"
+                      value="{{ old('title', $item->title) }}"
                       type="text"
                       minlength="3"
                       required
@@ -17,7 +17,7 @@
         {{-- Поле Идентификатор --}}
         <label for="slug">Идентификатор</label>
         <x-text-input name="slug"
-                      value="{{ $item->slug }}"
+                      value="{{ old('slug', $item->slug) }}"
                       type="text"
                       minlength="3"
                       class="mb-4"/>
@@ -38,8 +38,9 @@
                       </option>
                     @endforeach
             </select>
+          
            
-
+         
 
 
 
