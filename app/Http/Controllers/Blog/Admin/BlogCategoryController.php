@@ -78,20 +78,17 @@ class BlogCategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, string $id)
     {       
-
             $item = BlogCategories::find($id);
-            
             
             if(!$item) return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
                                      ->withInput();
-            
             
             $data = $request->all();
 
             if(empty($data['slug'])) {
                 $data['slug'] = Str::slug($data['title']);
             }
-            
+
             $result = $item->update($data);
             //update включает метод fill & save
             // $result = $item->fill($data)
