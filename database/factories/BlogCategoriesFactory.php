@@ -13,7 +13,7 @@ class BlogCategoriesFactory extends Factory
 {
 
     protected $model = BlogCategories::class;
-    private static $increment = 0;   
+    private static $increment = 1;   
     /**
      * Define the model's default state.
      *
@@ -22,7 +22,7 @@ class BlogCategoriesFactory extends Factory
     public function definition(): array
     {
         $categoryIncrement = self::$increment ++;
-        $categoryName = $categoryIncrement ? 'Категория #' .$categoryIncrement : 'Без категории' ;
+        $categoryName = $categoryIncrement > 1 ? 'Категория #' .$categoryIncrement : 'Без категории' ;
 
         return [
             'parent_id' => rand(1,4),

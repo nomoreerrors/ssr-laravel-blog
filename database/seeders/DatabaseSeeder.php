@@ -23,4 +23,12 @@ class DatabaseSeeder extends Seeder
 
  
     }
+
+    //Как вывести factory в консоль:
+    // public function run(): void
+    // {
+    //  $result =  BlogCategories::factory(11)->make();
+    //     dd($result);
+ 
+    // }
 }

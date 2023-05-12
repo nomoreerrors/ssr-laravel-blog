@@ -13,7 +13,7 @@
             <th>Родитель</th>
         </thead>
         <tbody>
-            @foreach($blogCategories as $category)
+            @foreach($paginator as $category)
                 @php /** var \App\Models\BlogCategories $category */ @endphp
                 
                     <tr >
@@ -39,13 +39,13 @@
     
 
             {{-- Если в базе категорий станет меньше, чем мы установили в пагинации, то ссылки на страницы исчезнут --}}
-            @if($blogCategories->total() > $blogCategories->count())
+            {{-- @if($blogCategories->total() > $blogCategories->count())
                 <br>
                 <div >
 
                     {{ $blogCategories->links() }}
                 </div>
-            @endif
+            @endif --}}
         </div>
 
 </x-app-layout>
