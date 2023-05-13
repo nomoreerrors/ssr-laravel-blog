@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\BlogPostsRepository;
 
 class BlogPostController extends BaseController
 {
@@ -19,7 +20,8 @@ class BlogPostController extends BaseController
      */
     public function index()
     {
-        return view('blog.posts.index');
+        $paginator = BlogPostsRepository::getAllWithPaginate(5);
+        return view('blog.admin.posts.index', compact('paginator'));
     }
 
     /**

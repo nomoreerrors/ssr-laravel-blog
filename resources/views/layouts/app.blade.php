@@ -15,7 +15,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-gray-100">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
@@ -29,9 +29,12 @@
             @endif
 
             <!-- Page Content -->
-            <main class=" mx-auto w-3/5 h-96">
+            <main>
                 {{ $slot }}
             </main>
         </div>
+        <footer class="h-96 bg-gray-100 mt-10">
+            Footer is here!
+        </footer>
     </body>
 </html>

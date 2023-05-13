@@ -2,24 +2,36 @@
 
 namespace App\Repositories;
 
-use App\Models\BlogCategories as Model;
+use App\Models\BlogPosts as Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 
 
-class BlogCategoryRepository extends BaseRepository 
+class BlogPostsRepository extends BaseRepository 
 {
 
-    public static function getAllWithPaginate($perPage = null)
+    public static function getAllWithPaginate():LengthAwarePaginator
     {
-        $columns = ['id', 'title', 'parent_id'];
+        $columns = [
+                    'id',
+                    'title',
+                    'slug',
+                    'is_published',
+                    'published_at',
+                    'user_id',
+                    'category_id'
+                    ];
+
         $result = Model::select($columns)
-                        ->paginate($perPage);
+                        ->orderBy('id', 'DESC')
+                        ->paginate(10);
+                    //   dd($result);
         return $result;
     }
-
+    
 
 
  
@@ -33,13 +45,13 @@ class BlogCategoryRepository extends BaseRepository
 
 
     //получить список категорий для вывода в выпадающем меню
-    public static function getForComboBox()
-    {
-         $result = Model::selectRaw('id, CONCAT(id, ". ", title) AS id_title')
-                         ->toBase()
-                         ->get();
-        return $result;
-    }
+    // public static function getForComboBox()
+    // {
+    //      $result = Model::selectRaw('id, CONCAT(id, ". ", title) AS id_title')
+    //                      ->toBase()
+    //                      ->get();
+    //     return $result;
+    // }
 
  
 }

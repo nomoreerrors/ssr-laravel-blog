@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Blog\PostController;
 use App\http\Controllers\Blog\Admin\BlogCategoryController;
+use App\Http\Controllers\Blog\Admin\BlogPostController;
+use App\Models\BlogCategories;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,14 +39,28 @@ Route::prefix('blog')->group(function () {
 });
 
 //админка
+
+// BlogCategories
 Route::prefix('blog/admin')->group(function () {
         Route::resource('category', BlogCategoryController::class)
                                         ->names('blog.admin.category')
                                         ->only('index', 'edit', 'store', 'update', 'create');
 
+
+// BlogPosts
+        Route::resource('posts', BlogPostController::class)
+                                        ->except(['show']) //кроме
+                                        ->names('blog.admin.posts');
+
 });
 
 
-// Route::resource('restTest', RestTestController::class);
+
+
+
+
+
+
+
 
 require __DIR__.'/auth.php';

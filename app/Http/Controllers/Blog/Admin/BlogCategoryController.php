@@ -12,18 +12,19 @@ use App\Models\BlogCategories;
 use Illuminate\Support\Str;
 use App\Repositories\BlogCategoryRepository;
 
+
+
 class BlogCategoryController extends BaseController
 {
     /**
      *  @var BlogCategoryRepository
      */
-    private $blogCategoryRepository;
-
+ 
 
     public function __construct()
     {
         parent::__construct();
-        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+
     }
 
 
@@ -34,7 +35,7 @@ class BlogCategoryController extends BaseController
     public function index()
     {
 
-        $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
+        $paginator = BlogCategoryRepository::getAllWithPaginate(5);
 
         return view('blog.admin.category.index', compact('paginator'));
     }
@@ -45,7 +46,7 @@ class BlogCategoryController extends BaseController
     public function create(BlogCategories $item)
     {
 
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $categoryList = BlogCategoryRepository::getForComboBox();
         
         return view('blog.admin.category.edit', 
                     compact('item', 'categoryList' ));
@@ -84,12 +85,12 @@ class BlogCategoryController extends BaseController
      */
     public function edit(string $id)
     {
-         $item = $this->blogCategoryRepository->getEdit($id);
+         $item = BlogCategoryRepository::getItem($id);
          if(empty($item)) {
                     abort('404');
          }
          
-         $categoryList = $this->blogCategoryRepository->getForComboBox();
+         $categoryList = BlogCategoryRepository::getForComboBox();
 
          return view('blog.admin.category.edit', compact('item','categoryList'));
     }
@@ -99,7 +100,7 @@ class BlogCategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, string $id)
     {       
-            $item = $this->blogCategoryRepository->getEdit($id);
+            $item = BlogCategoryRepository::getItem($id);
             
             if(!$item) return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
                                      ->withInput();
