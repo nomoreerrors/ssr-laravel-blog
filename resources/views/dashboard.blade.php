@@ -12,6 +12,7 @@
                     {{ __("You're logged in!") }}
 
                     <a class=" text-xl " href="{{ route('blog.admin.category.index') }}">Go to categories</a>
+                    <a class=" text-xl " href="{{ route('blog.admin.posts.index') }}">Go to Posts</a>
                 </div>
             </div>
         </div>

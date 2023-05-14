@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\BlogPosts as Model;
+use App\Models\User as User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -13,7 +14,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class BlogPostsRepository extends BaseRepository 
 {
 
-    public static function getAllWithPaginate():LengthAwarePaginator
+    public static function getAllWithPaginate()
     {
         $columns = [
                     'id',
@@ -27,10 +28,19 @@ class BlogPostsRepository extends BaseRepository
 
         $result = Model::select($columns)
                         ->orderBy('id', 'DESC')
+                        ->join(['category', 'user'])
                         ->paginate(10);
-                    //   dd($result);
-        return $result;
+
+                        // $posts = Model::where('user_id', 3)->get();
+        // return $result;
+
+
+        // $users = User::where('id', '>=', '7')->get();
+        // $posts = Model::whereBelongsTo($users)->get();
+        // dd($posts);
+        dd($result);
     }
+    //20/9 19/4 18/9
     
 
 

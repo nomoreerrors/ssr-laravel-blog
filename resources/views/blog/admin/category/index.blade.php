@@ -2,28 +2,28 @@
   
    {{-- Страница списка категорий блога--}}
 
-<div class='p-10'>
+<div >
     <div class="flex items-center text-2xl">
 
-    <table class="border-separate my-table-spacing text-center">
+        <table class="mb-6 mx-auto flex-col justify-center w-screen">
 
-        <thead>
-            <th>#</th>
-            <th>Категория</th>
-            <th>Родитель</th>
+        <thead class="bg-orange-300">
+            <th class="pl-4 py-6">#</th>
+            <th class="pl-4 py-6">Категория</th>
+            <th class="pl-4 py-6">Родитель</th>
         </thead>
         <tbody>
             @foreach($paginator as $category)
                 @php /** var \App\Models\BlogCategories $category */ @endphp
                 
                     <tr >
-                        <td>{{ $category->id }}</td>
-                        <td>
+                        <td class="p-6 bg-slate-300 ">{{ $category->id }}</td>
+                        <td class="p-6">
                             <a href="{{ route('blog.admin.category.edit', $category->id)}}">{{ $category->title }}</a>
                         </td>
                         
-                        <td
-                            @if(in_array($category->parent_id, [0, 1])) style="color: red" @endif>
+                        <td class="p-6 bg-slate-300 "
+                            @if(in_array($category->parent_id, [0, 1])) class="bg-red-400" @endif>
                                 {{ $category->parent_id }}
                         </td>
                     </tr>
@@ -33,19 +33,21 @@
         
     </table>
 
-        <a class="bg-purple-500 p-5 rounded-lg relative " href="{{ route('blog.admin.category.create') }}">Добавить</a>
+       
 
     </div>
+
+    <div  class="flex justify-between mt-10 items-center mx-10">
+    <a class="bg-purple-500 p-5 rounded-lg relative inline-block" href="{{ route('blog.admin.category.create') }}">Добавить</a>
     
 
-            {{-- Если в базе категорий станет меньше, чем мы установили в пагинации, то ссылки на страницы исчезнут --}}
-            {{-- @if($blogCategories->total() > $blogCategories->count())
+          @if($paginator->total() > $paginator->count())
                 <br>
-                <div >
+                <div class="inline-block">
 
-                    {{ $blogCategories->links() }}
+                    {{ $paginator->links() }}
                 </div>
-            @endif --}}
+            @endif
         </div>
-
+    </div>
 </x-app-layout>
