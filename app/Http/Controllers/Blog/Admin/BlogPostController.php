@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Repositories\BlogPostsRepository;
 use App\Repositories\BlogCategoryRepository;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\BlogPosts;
+use Illuminate\Support\Facades\DB;
 
 class BlogPostController extends BaseController
 {
@@ -73,28 +75,36 @@ class BlogPostController extends BaseController
      */
     public function update(BlogPostUpdateRequest $request, string $id)
     {
- 
-
-        // $item = BlogPostsRepository::getItem($id);
         
-        // if(empty($item)) return back()->withErrors(['msg' => `Запись с ID{$id} не найдена` ])
-        //                               ->withInput();
-
-        // $data = $request->all();
-        // $data['excerpt'] = Str::excerpt($data['content_html']);
-        // $data['slug'] = Str::slug($data['title']);
-
+    //    $result = DB::table('blog_posts')
+    //             ->leftJoin('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
+    //             ->select('blog_posts.title AS post_title', 'blog_categories.title')
+    //             ->get();
+    //     dd($result);
 
 
-        // $result = $item->update($data);
 
-        // if($result) return redirect()
-        //                     ->route('blog.admin.posts.edit', $item->id)
-        //                     ->with(['success' => 'Успешно сохранено']);
+        $item = BlogPostsRepository::getItem($id);
+        
+        if(empty($item)) return back()->withErrors(['msg' => `Запись с ID{$id} не найдена` ])
+                                      ->withInput();
 
-        // else return back()
-        //                 ->withInput()
-        //                 ->withErrors(['msg' => 'Ошибка сохранения']);
+        $data = $request->all();
+
+        $data["excerpt"] = Str::words($data["content_html"], 50);
+        $data["slug"] = Str::slug($data['title']);
+
+
+
+        $result = $item->update($data);
+
+        if($result) return redirect()
+                            ->route('blog.admin.posts.edit', $item->id)
+                            ->with(['success' => 'Успешно сохранено']);
+
+        else return back()
+                        ->withInput()
+                        ->withErrors(['msg' => 'Ошибка сохранения']);
 
     }
 

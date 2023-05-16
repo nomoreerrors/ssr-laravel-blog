@@ -6,6 +6,7 @@ use App\Models\BlogPosts as Model;
 use App\Models\User as User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -16,34 +17,38 @@ class BlogPostsRepository extends BaseRepository
     public static function getAllWithPaginate()
     {
         $columns = [
-                    'id',
-                    'title',
-                    'slug',
-                    'is_published',
-                    'published_at',
-                    'user_id',
-                    'category_id'
-                    ];
+                'blog_categories.title AS category_name',
+                'blog_posts.id',
+                'blog_posts.title',
+                'blog_posts.slug',
+                'blog_posts.is_published',
+                'blog_posts.published_at',
+                'blog_posts.category_id AS category_number',
+                'users.name AS author'
+                ];
 
-        $result = Model::select($columns)
-                        ->orderBy('id', 'DESC')
-                        ->with([
-                            'category' => function ($query) {
-                                    $query->select(['id', 'title']);
-                                    },
-                            'user:id,name'
-                            //выбираем определенные поля связей двумя способами
-                        ])
-                        ->paginate(10);
+                $result = DB::table('blog_posts')
+                ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
+                ->join('users', 'users.id', '=', 'blog_posts.user_id')
+                ->select($columns)
+                ->orderBy('id', 'DESC')
+                ->paginate(10);
 
+
+
+        // JOINS METHOD
+        // $result = DB::table('blog_posts')
+        //                 ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
+        //                 ->join('users', 'users.id', '=', 'blog_posts.user_id')
+        //                 ->select($columns)
+        //                 ->orderBy('id', 'DESC')
+        //                 ->paginate(10);
+                        
+                // dd($result);
                     
         return $result;
 
-        // $posts = Model::where('user_id', 3)->get();
-        // $users = User::where('id', '>=', '7')->get();
-        // $posts = Model::whereBelongsTo($users)->get();
-        // dd($posts);
-        // dd($result);
+         
     }
      
 

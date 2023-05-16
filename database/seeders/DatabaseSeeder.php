@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
        
        User::factory(5)->create();
        BlogCategories::factory(11)->create();
-       BlogPosts::factory(15)->create();
+       BlogPosts::factory(50)->create();
+
+       
+    // dd(BlogCategories::factory(11)->make());
 
 
     }

@@ -1,9 +1,6 @@
 <x-app-layout>
 
-{{-- index blade --}}
-{{-- index blade --}}
-{{-- index blade --}}
-
+ 
 
     <div class="text-2xl flex-col">
 
@@ -25,8 +22,8 @@
             @foreach($paginator as $post)
                 <tr @if(!$post->is_published) class="bg-purple-200" @endif >
                     <td class="p-6 bg-slate-300 ">{{ $post->id }}</td>
-                    <td class="p-6">{{ $post->user->name }}</td>
-                    <td class="p-6 bg-slate-300">{{ $post->category->title }}</td>
+                    <td class="p-6">{{ $post->author }}</td>
+                    <td class="p-6 bg-slate-300">{{ $post->category_name }}</td>
                     <td class="p-6">
                         <a href="{{ route('blog.admin.posts.edit', $post->id) }}">{{ $post->title }}</a>
                     </td>

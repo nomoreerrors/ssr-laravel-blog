@@ -35,7 +35,7 @@ class BlogCategoryController extends BaseController
     public function index()
     {
 
-        $paginator = BlogCategoryRepository::getAllWithPaginate(5);
+        $paginator = BlogCategoryRepository::getAllWithPaginate(8);
 
         return view('blog.admin.category.index', compact('paginator'));
     }
@@ -56,7 +56,7 @@ class BlogCategoryController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BlogCategoryCreateRequest $request)
+    public function store(BlogCategoryCreateRequest $request): mixed
     {
         $data = $request->input();  
         if(empty($data['slug'])) {

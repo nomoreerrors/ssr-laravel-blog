@@ -14,14 +14,6 @@
 
    
 
-
-        {{-- Поле Идентификатор --}}
-        {{-- <label for="slug">Идентификатор</label>
-        <x-text-input name="slug"
-                      value="{{ old('slug', $item->slug) }}"
-                      type="text"
-                      minlength="3"
-                      class="mb-4"/> --}}
                       
 
 
@@ -49,7 +41,7 @@
         <label for="content_html">Описание</label> 
             <textarea 
                   class="h-96"
-                  name="content_html" >{{ old('content_html', $item->content_html) }}</textarea>
+                  name="content_html" >{{ old("content_html", $item->content_html) }}</textarea>
                         {{-- old = helper laravel --}}
 
 
