@@ -20,9 +20,22 @@ class BlogCategoriesFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
+    {   
+        $movies = [ 
+                    'Боевики',
+                    'Комедии',
+                    'Драмы',
+                    'Фантастика',
+                    'Приключения',
+                    'Ужасы',
+                    'Фильмы-катастрофы',
+                    'Романтические',
+                    'Мультфильмы',
+                    'Топ 250'
+    ];
+
         $categoryIncrement = self::$increment ++;
-        $categoryName = $categoryIncrement > 1 ? 'Категория #' .$categoryIncrement : 'Без категории' ;
+        $categoryName = $categoryIncrement > 1 ? $movies[array_rand($movies)] . ' ' . '('.$categoryIncrement .')' : 'Без категории' ;
 
         return [
             'parent_id' => rand(1,4),

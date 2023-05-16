@@ -1,12 +1,11 @@
 <x-app-layout>
 
+{{-- index blade --}}
+{{-- index blade --}}
+{{-- index blade --}}
+
 
     <div class="text-2xl flex-col">
-       
-
-
-
-
 
 
 
@@ -38,6 +37,7 @@
         </tbody>
         </table>
 
+
         <div class="flex justify-between mt-10 items-center mx-10">
             <nav class="inline-block">
                 <a class="p-4 bg-pink-300 rounded" href="{{ route('blog.admin.posts.create') }}">Добавить</a>
@@ -51,8 +51,6 @@
             </div>
         </div>
     </div>
-
-
 
 
  

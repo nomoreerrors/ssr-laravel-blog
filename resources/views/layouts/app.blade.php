@@ -29,11 +29,11 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main >
                 {{ $slot }}
             </main>
         </div>
-        <footer class="h-96 bg-gray-100 mt-10">
+        <footer class="h-96 bg-gray-300 mt-10">
             Footer is here!
         </footer>
     </body>

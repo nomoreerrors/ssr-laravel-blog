@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
        BlogCategories::factory(11)->create();
        BlogPosts::factory(15)->create();
 
- 
+
     }
 
     //Как вывести factory в консоль:

@@ -1,4 +1,5 @@
 
+
 <div class="flex flex-col  m-5 w-2/4">
 
         {{-- Заголовок --}}
@@ -15,25 +16,25 @@
 
 
         {{-- Поле Идентификатор --}}
-        <label for="slug">Идентификатор</label>
+        {{-- <label for="slug">Идентификатор</label>
         <x-text-input name="slug"
                       value="{{ old('slug', $item->slug) }}"
                       type="text"
                       minlength="3"
-                      class="mb-4"/>
+                      class="mb-4"/> --}}
                       
 
 
 
         {{-- Колонка выбора родительской категории --}}
-          <label for="parent_id">Родитель</label>
-            <select  name="parent_id"
+          <label for="category_id">Категория</label>
+            <select  name="category_id"
                       placeholder="Выберите категорию"
-                      require
+                      required
                       class="mb-4">
                     @foreach($categoryList as $categoryOption)
                       <option value="{{ $categoryOption->id }}"
-                        @if($categoryOption->id == $item->parent_id) selected @endif>
+                        @if($categoryOption->id == $item->category_id) selected @endif>
                          {{ $categoryOption->id_title }}
                       </option>
                     @endforeach
@@ -45,8 +46,10 @@
 
 
         {{-- Описание --}}
-        <label for="description">Описание</label> 
-            <textarea name="description"rows="3">{{ old('description', $item->description) }}</textarea>
+        <label for="content_html">Описание</label> 
+            <textarea 
+                  class="h-96"
+                  name="content_html" >{{ old('content_html', $item->content_html) }}</textarea>
                         {{-- old = helper laravel --}}
 
 

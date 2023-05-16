@@ -18,13 +18,15 @@
                     @endif
                         </h2>
                         </x-slot>
+
+                    <x-results-messages-component />
                       
                         
                     {{-- update form --}}
                     @if($item->exists)
                     <form method="POST"
                               action="{{ route('blog.admin.category.update', $item->id )}}"
-                              class=" flex gap-column gap-x-10 mt-10 border border-gray-200  rounded-lg h-1500 " >
+                              class="flex justify-center mt-10 border border-gray-200 rounded-lg h-2/3 space-x-20" >
                         @method('PATCH')
 
                         
@@ -32,26 +34,18 @@
                     {{-- create form --}}
                     <form method="POST"
                                     action="{{ route('blog.admin.category.store') }}"
-                                    class=" flex gap-column gap-x-10 mt-10 border border-gray-200  rounded-lg h-1500 " >
+                                    class="flex justify-center mt-10 border border-gray-200 rounded-lg h-2/3  space-x-20" >
                     @endif
                         @csrf
 
 
                      
 
-                        {{-- display errors --}}
-                        @if($errors->any())
-                            <div class=" bg-red-300 p-2"> {{ $errors->first() }} </div>
-                        @endif
-
-                        @if(session('success'))
-                            <div class=" bg-green-300 p-2">{{ session()->get('success') }}</div>
-                        @endif
-              
+                     
 
                         {{-- inputs and right info column --}}
                               @include('blog.admin.category.includes.edit-category-inputs')
-                              @include('blog.admin.category.includes.edit-category-info-col')
+                             <x-edit-info-column-component :item='$item'/>
                               
                     </form>
 

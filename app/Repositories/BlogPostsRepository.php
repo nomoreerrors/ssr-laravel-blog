@@ -4,8 +4,7 @@ namespace App\Repositories;
 
 use App\Models\BlogPosts as Model;
 use App\Models\User as User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -28,20 +27,25 @@ class BlogPostsRepository extends BaseRepository
 
         $result = Model::select($columns)
                         ->orderBy('id', 'DESC')
-                        ->join(['category', 'user'])
+                        ->with([
+                            'category' => function ($query) {
+                                    $query->select(['id', 'title']);
+                                    },
+                            'user:id,name'
+                            //выбираем определенные поля связей двумя способами
+                        ])
                         ->paginate(10);
 
-                        // $posts = Model::where('user_id', 3)->get();
-        // return $result;
+                    
+        return $result;
 
-
+        // $posts = Model::where('user_id', 3)->get();
         // $users = User::where('id', '>=', '7')->get();
         // $posts = Model::whereBelongsTo($users)->get();
         // dd($posts);
-        dd($result);
+        // dd($result);
     }
-    //20/9 19/4 18/9
-    
+     
 
 
  

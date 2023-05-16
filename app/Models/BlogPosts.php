@@ -14,7 +14,15 @@ class BlogPosts extends Model
     protected $table = 'blog_posts';
 
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'category_id',
+        'content_html',
+        'excerpt'
+    ];
 
+    
     //relationships - связь двух таблиц
     public function category(): BelongsTo
     {
