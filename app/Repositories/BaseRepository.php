@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -18,10 +19,7 @@ abstract class BaseRepository
 
    
   
-    public static function getItem(int $id)
-    {
-        //
-    }
+  
     
 
 

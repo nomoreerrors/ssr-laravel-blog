@@ -23,11 +23,7 @@ class BlogCategoryRepository extends BaseRepository
 
 
  
-    public static function getItem(int $id): Model
-    {
-
-        return Model::find($id);
-    }
+ 
 
 
 

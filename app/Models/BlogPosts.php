@@ -19,7 +19,8 @@ class BlogPosts extends Model
         'slug',
         'category_id',
         'content_html',
-        'excerpt'
+        'excerpt',
+        'is_published'
     ];
 
     

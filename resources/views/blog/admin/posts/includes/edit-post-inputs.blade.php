@@ -46,6 +46,43 @@
 
 
 
+
+        {{-- IS_PUBLISHED SENDS TRUE OR NOTHING --}}
+        <div>
+        <input
+            name="is_published"
+            type="checkbox"
+            class="my-10"
+            @if($item->is_published)
+            checked
+            @endif
+            >
+            <label for="is_published">Опубликовано</label>
+
+
+            {{-- <form method="POST" action="{{ route('blog.admin.posts.destroy', $item->id) }}">
+              @method('DELETE')
+              @csrf
+              
+              <td class="text-center ">
+                  <button type="submit">Удалить</button>
+              </td>
+            </form> --}}
+        </div>
+
+
+        {{-- DESTROY POST BUTTON--}}
+        
+
+        {{-- CONTENT_RAW --}}
+        {{-- <label for="content_raw">Описание RAW</label> 
+            <textarea 
+                  class="h-96"
+                  name="content_raw" >{{ old("content_raw", $item->content_raw) }}</textarea> --}}
+                        {{-- old = helper laravel --}}
+
+
+
                         
   </div>
 

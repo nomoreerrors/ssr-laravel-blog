@@ -14,7 +14,23 @@ use Illuminate\Support\Facades\DB;
 class BlogPostsRepository extends BaseRepository 
 {
 
-    public static function getAllWithPaginate()
+
+    public static function getItem(int $id): Model
+    {
+
+        return Model::find($id);
+    }
+
+
+    public static function deleteItem(string $id): void
+    {
+               Model::where('id', $id)->delete();
+    }
+
+
+
+
+    public static function getAllWithPaginate(int $page_count)
     {
         $columns = [
                 'blog_categories.title AS category_name',
@@ -27,38 +43,20 @@ class BlogPostsRepository extends BaseRepository
                 'users.name AS author'
                 ];
 
-                $result = DB::table('blog_posts')
-                ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
+                
+
+    $result = Model::join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
                 ->join('users', 'users.id', '=', 'blog_posts.user_id')
                 ->select($columns)
                 ->orderBy('id', 'DESC')
-                ->paginate(10);
+                ->paginate($page_count);
 
-
-
-        // JOINS METHOD
-        // $result = DB::table('blog_posts')
-        //                 ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
-        //                 ->join('users', 'users.id', '=', 'blog_posts.user_id')
-        //                 ->select($columns)
-        //                 ->orderBy('id', 'DESC')
-        //                 ->paginate(10);
-                        
-                // dd($result);
-                    
         return $result;
-
          
     }
      
-
-
  
-    public static function getItem(int $id): Model
-    {
-
-        return Model::find($id);
-    }
+  
 
 
 

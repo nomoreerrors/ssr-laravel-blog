@@ -9,9 +9,6 @@ use App\Http\Requests\BlogPostUpdateRequest;
 use Illuminate\Http\Request;
 use App\Repositories\BlogPostsRepository;
 use App\Repositories\BlogCategoryRepository;
-use Illuminate\Support\Facades\Redirect;
-use App\Models\BlogPosts;
-use Illuminate\Support\Facades\DB;
 
 class BlogPostController extends BaseController
 {
@@ -27,7 +24,7 @@ class BlogPostController extends BaseController
      */
     public function index()
     {
-        $paginator = BlogPostsRepository::getAllWithPaginate(5);
+        $paginator = BlogPostsRepository::getAllWithPaginate(15);
         return view('blog.admin.posts.index', compact('paginator'));
     }
 
@@ -70,33 +67,26 @@ class BlogPostController extends BaseController
          return view('blog.admin.posts.edit', compact('item','categoryList'));
     }
 
+
+    
     /**
      * Update the specified resource in storage.
      */
     public function update(BlogPostUpdateRequest $request, string $id)
     {
         
-    //    $result = DB::table('blog_posts')
-    //             ->leftJoin('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
-    //             ->select('blog_posts.title AS post_title', 'blog_categories.title')
-    //             ->get();
-    //     dd($result);
-
-
-
         $item = BlogPostsRepository::getItem($id);
         
         if(empty($item)) return back()->withErrors(['msg' => `Запись с ID{$id} не найдена` ])
                                       ->withInput();
 
         $data = $request->all();
-
         $data["excerpt"] = Str::words($data["content_html"], 50);
         $data["slug"] = Str::slug($data['title']);
-
-
-
+        $request->has('is_published') ? $data['is_published'] = true : $data['is_published'] = false;
         $result = $item->update($data);
+
+        
 
         if($result) return redirect()
                             ->route('blog.admin.posts.edit', $item->id)
@@ -113,6 +103,9 @@ class BlogPostController extends BaseController
      */
     public function destroy(string $id)
     {
-        //
+        BlogPostsRepository::deleteItem($id);
+        return redirect()
+                ->route('blog.admin.posts.index')
+                ->with(['success' => 'Успешно сохранено']);
     }
 }
