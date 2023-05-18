@@ -38,10 +38,10 @@
 
 
         {{-- Описание --}}
-        <label for="content_html">Описание</label> 
+        <label for="content_raw">Описание</label> 
             <textarea 
                   class="h-96"
-                  name="content_html" >{{ old("content_html", $item->content_html) }}</textarea>
+                  name="content_raw" >{{ old("content_raw", $item->content_raw) }}</textarea>
                         {{-- old = helper laravel --}}
 
 
@@ -53,6 +53,7 @@
             name="is_published"
             type="checkbox"
             class="my-10"
+            value="1"
             @if($item->is_published)
             checked
             @endif

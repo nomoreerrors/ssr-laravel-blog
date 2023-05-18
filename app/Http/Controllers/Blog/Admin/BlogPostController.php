@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogCategories;
 use Illuminate\Support\Str;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Models\BlogPosts;
 use Illuminate\Http\Request;
 use App\Repositories\BlogPostsRepository;
+use Illuminate\Support\Carbon;
 use App\Repositories\BlogCategoryRepository;
 
 class BlogPostController extends BaseController
@@ -73,21 +75,16 @@ class BlogPostController extends BaseController
      * Update the specified resource in storage.
      */
     public function update(BlogPostUpdateRequest $request, string $id)
-    {
-        
+    {   
+
         $item = BlogPostsRepository::getItem($id);
         
         if(empty($item)) return back()->withErrors(['msg' => `Запись с ID{$id} не найдена` ])
                                       ->withInput();
 
         $data = $request->all();
-        $data["excerpt"] = Str::words($data["content_html"], 50);
-        $data["slug"] = Str::slug($data['title']);
-        $request->has('is_published') ? $data['is_published'] = true : $data['is_published'] = false;
         $result = $item->update($data);
-
         
-
         if($result) return redirect()
                             ->route('blog.admin.posts.edit', $item->id)
                             ->with(['success' => 'Успешно сохранено']);
@@ -103,9 +100,12 @@ class BlogPostController extends BaseController
      */
     public function destroy(string $id)
     {
-        BlogPostsRepository::deleteItem($id);
+        // BlogPostsRepository::deleteItem($id);
+
         return redirect()
                 ->route('blog.admin.posts.index')
                 ->with(['success' => 'Успешно сохранено']);
+
+
     }
 }

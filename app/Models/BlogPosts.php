@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+
+
+
+/**
+ * @property string $excerpt
+ * 
+ */
+
+
 
 class BlogPosts extends Model
 {
@@ -14,15 +24,26 @@ class BlogPosts extends Model
     protected $table = 'blog_posts';
 
 
+
     protected $fillable = [
         'title',
         'slug',
         'category_id',
         'content_html',
+        'updated_at',
+        'content_raw',
         'excerpt',
-        'is_published'
+        'is_published',
+        'published_at'
     ];
 
+
+    public function getDateFormat()
+    {
+        return Carbon::now()->add(3, 'hours');
+    }
+   
+    
     
     //relationships - связь двух таблиц
     public function category(): BelongsTo
