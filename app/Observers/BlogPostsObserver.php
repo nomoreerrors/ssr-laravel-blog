@@ -40,17 +40,8 @@ class BlogPostsObserver
      */
     public function updated(BlogPosts $blogPost): void
     {
-
+        dd($blogPost->isDirty('content_raw'));
         
-        // $test[] = $blogPost->isDirty();
-        // $test[] = $blogPost->isDirty('is_published');
-        // $test[] = $blogPost->isDirty('user_id');
-        // $test[] = $blogPost->getAttribute('is_published');
-        // $test[] = $blogPost->is_published;
-        // $test[] = $blogPost->getOriginal('is_published');
-        // dd($test);
-         
-
         $this->setExcerpt($blogPost);
         $this->setPublishedAt($blogPost);
         $this->setSlug($blogPost);
