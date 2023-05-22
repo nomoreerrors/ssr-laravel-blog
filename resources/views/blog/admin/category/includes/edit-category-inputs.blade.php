@@ -29,7 +29,7 @@
           <label for="parent_id">Родитель</label>
             <select  name="parent_id"
                       placeholder="Выберите категорию"
-                      require
+                      required
                       class="mb-4">
                     @foreach($categoryList as $categoryOption)
                       <option value="{{ $categoryOption->id }}"
@@ -50,6 +50,9 @@
                         {{-- old = helper laravel --}}
 
 
+
+
+       
 
                         
   </div>

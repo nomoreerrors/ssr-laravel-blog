@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BlogPostCreateRequest;
 use App\Models\BlogCategories;
 use Illuminate\Support\Str;
 use App\Http\Requests\BlogPostUpdateRequest;
 use App\Models\BlogPosts;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\BlogPostsRepository;
 use Illuminate\Support\Carbon;
 use App\Repositories\BlogCategoryRepository;
@@ -33,17 +34,27 @@ class BlogPostController extends BaseController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(BlogPosts $item)
     {
-        //
+        $categoryList = BlogCategoryRepository::getForComboBox();
+        return view('blog.admin.posts.edit', compact('item', 'categoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogPostCreateRequest $request)
     {
-        //
+        $data = $request->input();
+        $item = new BlogPosts($data);
+        $item->save();
+
+        if($item) return redirect()->route('blog.admin.posts.edit', $item->id)
+                            ->withInput()
+                            ->with(['success' => 'Добавлено']);
+
+        else back()->withErrors(['msg' => 'Ошибка сохранения'])
+                    ->withInput();
     }
 
     /**

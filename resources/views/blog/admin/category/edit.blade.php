@@ -31,10 +31,11 @@
 
                         
                     @else 
-                    {{-- create form --}}
+                    {{-- category creating form --}}
                     <form method="POST"
                                     action="{{ route('blog.admin.category.store') }}"
                                     class="flex justify-center mt-10 border border-gray-200 rounded-lg h-2/3  space-x-20" >
+
                     @endif
                         @csrf
 

@@ -42,6 +42,7 @@ class BlogCategoryController extends BaseController
 
     /**
      * Show the form for creating a new resource.
+     * Item is an empty array here !!
      */
     public function create(BlogCategories $item)
     {
@@ -59,15 +60,15 @@ class BlogCategoryController extends BaseController
     public function store(BlogCategoryCreateRequest $request): mixed
     {
         $data = $request->input();  
-        if(empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+       
 
         $item = new BlogCategories($data);
         $item->save();
-        
 
-        if($item) return redirect()->route('blog.admin.category.edit', $item->id);
+
+        if($item) return redirect()->route('blog.admin.category.edit', $item->id)
+                            ->with(['success' => "Успешно сохранено"]);
+
         else back()->withErrors(['msg' => 'Ошибка сохранения в Store'])
                     ->withInput();
     }
@@ -89,7 +90,6 @@ class BlogCategoryController extends BaseController
          if(empty($item)) {
                     abort('404');
          }
-         
          $categoryList = BlogCategoryRepository::getForComboBox();
 
          return view('blog.admin.category.edit', compact('item','categoryList'));
@@ -107,9 +107,6 @@ class BlogCategoryController extends BaseController
             
             $data = $request->all();
 
-            if(empty($data['slug'])) {
-                $data['slug'] = Str::slug($data['title']);
-            }
 
             $result = $item->update($data);
             

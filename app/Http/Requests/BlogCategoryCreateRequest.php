@@ -22,10 +22,22 @@ class BlogCategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'  => 'required|min:5|max:200',
+            'title'  => 'required|min:5|max:200|unique:blog_categories',
             'slug'  => 'max:200',
-            'content_html' => 'string|max:500|min:3',
-            'category_id' => 'required|integer|exists:blog_categories,id',
+            'description' => 'string|max:1000|min:3',
+            'parent_id' => 'integer|exists:blog_categories,id',
     ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Поле "Title" обязательно',
+            'title.min' => 'Введите не менее :min символов',
+            'title.max' => 'Поле "Title" не должно превышать :max символов',
+            'title.unique' => 'Такое название уже существует',
+            'content_raw.required' => 'Заполните описание',
+        ];
     }
 }

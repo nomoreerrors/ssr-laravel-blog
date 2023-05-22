@@ -23,7 +23,7 @@ class BlogPosts extends Model
     use SoftDeletes;
     protected $table = 'blog_posts';
 
-
+    const UNKNOWN_USER = 1;
 
     protected $fillable = [
         'title',

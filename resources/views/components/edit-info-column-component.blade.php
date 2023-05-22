@@ -7,7 +7,10 @@
 
     <div class="flex-1  bg-green-200 flex justify-center items-center">
          <x-primary-button type="submit">
-             Изменить
+
+                @if ($item->exists) Изменить
+                @else Добавить
+                @endif   
          </x-primary-button>
     </div>
 

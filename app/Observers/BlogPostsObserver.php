@@ -5,6 +5,7 @@ namespace App\Observers;
 use Illuminate\Support\Carbon;
 use App\Models\BlogPosts;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class BlogPostsObserver
 {
@@ -17,21 +18,16 @@ class BlogPostsObserver
     }
 
 
-    //BEFORE
-    // public function updating(BlogPosts $blogPost): void
-    // {
-        // $test[] = $blogPost->isDirty();
-        // $test[] = $blogPost->isDirty('is_published');
-        // $test[] = $blogPost->isDirty('user_id');
-        // $test[] = $blogPost->getAttribute('is_published');
-        // $test[] = $blogPost->is_published;
-        // $test[] = $blogPost->getOriginal('is_published');
-        // dd($test);
-        // $this->setExcerpt($blogPost);
-        // $this->setPublishedAt($blogPost);
-        // $this->setSlug($blogPost);
-        // dd('lolwuuuuut1');
-    // }
+    public function creating(BlogPosts $blogPost): void
+    {
+        $this->setSlug($blogPost);
+        $this->setPublishedAt($blogPost);
+        $this->setExcerpt($blogPost);
+        $this->setHtml($blogPost);
+        $this->setUser($blogPost);
+        
+    }
+
 
 
     //AFTER
@@ -40,12 +36,19 @@ class BlogPostsObserver
      */
     public function updated(BlogPosts $blogPost): void
     {
-        dd($blogPost->isDirty('content_raw'));
-        
+        //
+    }
+
+
+
+    /**
+     * Before saving to DB
+     */
+    public function updating(BlogPosts $blogPost): void
+    {
         $this->setExcerpt($blogPost);
         $this->setPublishedAt($blogPost);
         $this->setSlug($blogPost);
-
     }
 
     /**
@@ -101,6 +104,26 @@ class BlogPostsObserver
         if(empty($blogPost->excerpt))
                 $blogPost->excerpt = Str::words($blogPost->content_raw, 50);
 
+    }
+
+
+
+
+    protected function setHtml(BlogPosts $blogPost): void
+    {
+        if($blogPost->isDirty('content_raw'))
+        //здесь будет генерация html
+              $blogPost->content_html = $blogPost->content_raw;
+
+    }
+
+
+    /**
+     * Если пользователь не авторизован, устанавливается пользователь по умолчанию
+     */
+    protected function setUser(BlogPosts $blogPost): void
+    {
+        $blogPost->user_id = Auth::id() ?? BlogPosts::UNKNOWN_USER;
     }
    
 

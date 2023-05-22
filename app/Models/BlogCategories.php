@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class BlogCategories extends Model
 {
@@ -19,4 +20,11 @@ class BlogCategories extends Model
         'parent_id',
         'description',
     ];
+
+
+
+    public function getDateFormat()
+    {
+        return Carbon::now()->add(3, 'hours');
+    }
 }

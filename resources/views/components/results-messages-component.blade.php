@@ -1,6 +1,8 @@
-
+{{-- all method gets text error messages --}}
 @if($errors->any())
-    <div class=" bg-red-300 p-2"> {{ $errors->first() }} </div>
+        @foreach($errors->all() as $errorMessage)
+        <div  class=" bg-red-300 p-2">{{ $errorMessage }}</div>
+        @endforeach
 @endif
 {{-- здесь мог бы быть цельный список ошибок --}}
 

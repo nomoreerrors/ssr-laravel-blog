@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('parent_id')->unsigned()->default(1);
             $table->string('slug')->unique();
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('description', 1000)->nullable();
 
 
 
