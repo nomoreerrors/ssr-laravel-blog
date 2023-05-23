@@ -34,13 +34,13 @@ class BlogPostsRepository extends BaseRepository
     public static function getAllWithPaginate(int $page_count)
     {
         $columns = [
-                'blog_categories.title AS category_name',
+                'blog_categories.title AS categoryTitle',
                 'blog_posts.id',
                 'blog_posts.title',
                 'blog_posts.slug',
                 'blog_posts.is_published',
                 'blog_posts.published_at',
-                'blog_posts.category_id AS category_number',
+                'blog_posts.category_id AS category_id',
                 'users.name AS author'
                 ];
 

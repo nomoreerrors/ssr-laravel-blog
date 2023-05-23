@@ -28,6 +28,7 @@ class BlogPostController extends BaseController
     public function index()
     {
         $paginator = BlogPostsRepository::getAllWithPaginate(15);
+        // dd($paginator);
         return view('blog.admin.posts.index', compact('paginator'));
     }
 

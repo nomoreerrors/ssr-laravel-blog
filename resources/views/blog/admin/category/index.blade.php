@@ -22,10 +22,13 @@
                             <a href="{{ route('blog.admin.category.edit', $category->id)}}">{{ $category->title }}</a>
                         </td>
                         
-                        <td class="p-6 bg-slate-300 "
-                            @if(in_array($category->parent_id, [0, 1])) class="bg-red-400" @endif>
-                                {{ $category->parent_id }}
+                        <td class="p-6 bg-slate-300 ">
+                            {{ $category->parentCategory->id .'.' }} {{ $category->parentCategory->title }} 
+
+                            {{ $category->parentTitle .'.old method' }}
+                            {{-- {{ $category->created_at .'.new method' }} --}}
                         </td>
+                      
                     </tr>
 
             @endforeach

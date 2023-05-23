@@ -45,7 +45,8 @@ class BlogPosts extends Model
    
     
     
-    //relationships - связь двух таблиц
+    //foreign key blog_posts.category_id references blog_categories.id  
+    //или посты принадлежат категориям
     public function category(): BelongsTo
     {
         return $this->belongsTo(BlogCategories::class);

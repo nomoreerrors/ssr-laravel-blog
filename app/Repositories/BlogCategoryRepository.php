@@ -12,11 +12,14 @@ use Illuminate\Support\Facades\DB;
 class BlogCategoryRepository extends BaseRepository 
 {
 
-    public static function getAllWithPaginate($perPage = null)
+    public static function getAllWithPaginate($page_count = null)
     {
         $columns = ['id', 'title', 'parent_id'];
         $result = Model::select($columns)
-                        ->paginate($perPage);
+                        ->with([
+                            'parentCategory:id,title'
+                        ])
+                        ->paginate($page_count);
         return $result;
     }
 
