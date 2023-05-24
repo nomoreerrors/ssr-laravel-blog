@@ -1,12 +1,13 @@
 <x-app-layout>
 
- 
+   
 
     <div class="text-xl flex-col">
-
+        
+        <x-results-messages-component />
 
             {{-- THEAD --}}
-        <table class="mb-6  flex-col justify-center w-screen">
+        <table class="mb-6  flex-col justify-center mx-auto max-w-[1920px]">
             <thead class="bg-orange-300">
                 <tr>
                     <th class="pl-4 py-6 ">#</th>
@@ -49,7 +50,7 @@
                             @method('DELETE')
                             @csrf
                             
-                            <td class="text-center ">
+                            <td class="text-center bg-pink-400 px-10">
                                 <button type="submit">X</button>
                             </td>
                     </form>

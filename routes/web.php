@@ -52,6 +52,10 @@ Route::prefix('blog/admin')->group(function () {
                                         ->except(['show']) //кроме
                                         ->names('blog.admin.posts');
 
+
+        Route::patch('posts/{id}/restore', [BlogPostController::class, 'restore'])
+                                                ->name('blog.admin.posts.restore');
+
 });
 
 

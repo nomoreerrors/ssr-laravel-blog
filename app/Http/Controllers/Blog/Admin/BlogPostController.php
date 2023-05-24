@@ -28,9 +28,11 @@ class BlogPostController extends BaseController
     public function index()
     {
         $paginator = BlogPostsRepository::getAllWithPaginate(15);
-        // dd($paginator);
+        // dd($trashedId);
         return view('blog.admin.posts.index', compact('paginator'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,6 +42,8 @@ class BlogPostController extends BaseController
         $categoryList = BlogCategoryRepository::getForComboBox();
         return view('blog.admin.posts.edit', compact('item', 'categoryList'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -57,6 +61,9 @@ class BlogPostController extends BaseController
         else back()->withErrors(['msg' => 'Ошибка сохранения'])
                     ->withInput();
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -112,12 +119,31 @@ class BlogPostController extends BaseController
      */
     public function destroy(string $id)
     {
-        // BlogPostsRepository::deleteItem($id);
+        //soft delete
+        $result = BlogPosts::destroy($id);
+        //delete from DB
+        // $result = BlogPosts::withTrashed()->delete();
+        if($result) {
+            return redirect()
+                    ->route('blog.admin.posts.index')
+                    ->with([
+                            'success' => 'Успешно удалено',
+                            'trashedId' => $id
+                            ]);
+        } else {
+            return back()->withErrors(['msg' => 'Что-то пошло не так']);
 
-        return redirect()
-                ->route('blog.admin.posts.index')
-                ->with(['success' => 'Успешно сохранено']);
+    }
+    }
 
+    public function restore(string $trashedId)
+    {
+        $result = BlogPosts::withTrashed()->find($trashedId)->restore();
 
+        if($result) return redirect()
+                    ->route('blog.admin.posts.index')
+                    ->with(['success' => 'Восстановлено']);
+
+        else return back()->withErrors(['msg' => 'Что-то пошло не так']);
     }
 }

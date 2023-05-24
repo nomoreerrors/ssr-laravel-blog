@@ -51,6 +51,17 @@ class BlogPostsObserver
         $this->setSlug($blogPost);
     }
 
+
+    public function deleting(BlogPosts $blogPost): void
+    {
+        // dd(__METHOD__, $blogPost);
+
+
+        //return false;
+        //здесь может быть возврат false и сопутствующая логика для запрета удаления записи.
+    }
+
+
     /**
      * Handle the BlogPosts "deleted" event.
      */

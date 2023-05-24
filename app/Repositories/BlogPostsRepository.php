@@ -22,11 +22,7 @@ class BlogPostsRepository extends BaseRepository
     }
 
 
-    public static function deleteItem(string $id): void
-    {
-            Model::where('id', $id);
-            //    Model::where('id', $id)->delete();
-    }
+ 
 
 
 
