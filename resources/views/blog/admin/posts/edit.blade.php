@@ -21,7 +21,11 @@
                 <x-results-messages-component />
                       
                         
-                       {{-- update form --}}
+                {{-- update form --}}
+                         {{-- $user->exists contains true if the model is the real model taken from the database.
+                          For example, if you create $user = new User and set some properties to it,
+                          $user->exists will contain false, as long as you don't do $user->save().
+                           Once it's saved or obtained from database, $model->exists will be true. --}}
                        @if($item->exists)
                        <form method="POST"
                                  action="{{ route('blog.admin.posts.update', $item->id )}}"

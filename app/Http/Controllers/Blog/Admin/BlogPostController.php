@@ -28,7 +28,21 @@ class BlogPostController extends BaseController
     public function index()
     {
         $paginator = BlogPostsRepository::getAllWithPaginate(15);
-        // dd($trashedId);
+
+        $collection = collect(BlogPosts::all());
+        $collection->transform(function( $item) {
+
+                $item['published_at'] = Carbon::parse($item['published_at']);
+                return $item;
+        });
+
+        $result = $collection->map(function($item) {
+            $item['day'] = $item->created_at->day;
+            $item['hours'] = $item->created_at->hour;
+            return $item;
+        });
+        dd($result);
+
         return view('blog.admin.posts.index', compact('paginator'));
     }
 
@@ -39,6 +53,7 @@ class BlogPostController extends BaseController
      */
     public function create(BlogPosts $item)
     {
+        // create $item just for the sake of using the same View as Edit method
         $categoryList = BlogCategoryRepository::getForComboBox();
         return view('blog.admin.posts.edit', compact('item', 'categoryList'));
     }
@@ -50,11 +65,12 @@ class BlogPostController extends BaseController
      */
     public function store(BlogPostCreateRequest $request)
     {
+
         $data = $request->input();
         $item = new BlogPosts($data);
         $item->save();
 
-        if($item) return redirect()->route('blog.admin.posts.edit', $item->id)
+        if($item) return to_route('blog.admin.posts.edit', $item->id)
                             ->withInput()
                             ->with(['success' => 'Добавлено']);
 
@@ -78,13 +94,16 @@ class BlogPostController extends BaseController
      */
     public function edit(string $id)
     {
+
+
         $item = BlogPostsRepository::getItem($id);
+        
          if(empty($item)) {
                     abort('404');
          }
          
          $categoryList = BlogCategoryRepository::getForComboBox();
- 
+
          return view('blog.admin.posts.edit', compact('item','categoryList'));
     }
 
@@ -100,13 +119,15 @@ class BlogPostController extends BaseController
         
         if(empty($item)) return back()->withErrors(['msg' => `Запись с ID{$id} не найдена` ])
                                       ->withInput();
-
+ 
         $data = $request->all();
         $result = $item->update($data);
-        
-        if($result) return redirect()
-                            ->route('blog.admin.posts.edit', $item->id)
-                            ->with(['success' => 'Успешно сохранено']);
+        //returns bool
+        if($result) return to_route('blog.admin.posts.edit', $item)
+                            //If you are redirecting to a route with an "ID" 
+                            //parameter that is being populated from an Eloquent model,
+                            // you may pass the model itself. The ID will be extracted automatically ($item)
+                                ->with(['success' => 'Успешно сохранено']);
 
         else return back()
                         ->withInput()
@@ -124,8 +145,7 @@ class BlogPostController extends BaseController
         //delete from DB
         // $result = BlogPosts::withTrashed()->delete();
         if($result) {
-            return redirect()
-                    ->route('blog.admin.posts.index')
+            return to_route('blog.admin.posts.index')
                     ->with([
                             'success' => 'Успешно удалено',
                             'trashedId' => $id

@@ -6,6 +6,7 @@ use App\Models\BlogPosts as Model;
 use App\Models\User as User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
