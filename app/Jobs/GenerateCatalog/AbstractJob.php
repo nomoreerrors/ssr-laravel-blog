@@ -1,27 +1,25 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\GenerateCatalog;
 
-use App\Models\BlogPosts;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class BlogPostsCreatedJob implements ShouldQueue
+class AbstractJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-
-    private object $blogPost;
     /**
      * Create a new job instance.
      */
-    public function __construct(BlogPosts $blogPost)
+    public function __construct()
     {
-        $this->blogPost = $blogPost;
+        $this->onQueue('generate-catalog'); //очередь по умолч.
     }
 
     /**
@@ -29,6 +27,14 @@ class BlogPostsCreatedJob implements ShouldQueue
      */
     public function handle(): void
     {
-        logs()->info("Создана новая запись в блоге {$this->blogPost->id}");
+        $this->debug('done');
+    }
+
+
+    protected function debug(string $msg): void
+    {
+        $class = static::class;
+        $msg = $msg . "{$class}"; 
+        Log::info($msg);
     }
 }

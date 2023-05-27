@@ -38,7 +38,7 @@ return [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 90, // Если задача висит более 90 сек, повторить 
             'after_commit' => false,
         ],
 

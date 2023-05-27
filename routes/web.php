@@ -56,6 +56,11 @@ Route::prefix('blog/admin')->group(function () {
         Route::patch('posts/{id}/restore', [BlogPostController::class, 'restore'])
                                                 ->name('blog.admin.posts.restore');
 
+
+
+        Route::get('posts/prepare-catalog', [BlogPostController::class, 'testQueueChain'])
+                                                ->name('testqueuechain');
+
 });
  
 

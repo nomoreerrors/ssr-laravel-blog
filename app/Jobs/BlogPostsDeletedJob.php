@@ -13,12 +13,16 @@ class BlogPostsDeletedJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
+    private int $blogPostId;
+
+
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct($blogPostId)
     {
-        //
+        $this->blogPostId = $blogPostId;
     }
 
     /**
@@ -26,6 +30,6 @@ class BlogPostsDeletedJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        logs()->warning("Создана новая запись в блоге {$this->blogPostId}");
     }
 }

@@ -7,6 +7,9 @@ use App\Http\Requests\BlogPostCreateRequest;
 use App\Models\BlogCategories;
 use Illuminate\Support\Str;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Jobs\BlogPostsCreatedJob;
+use App\Jobs\BlogPostsDeletedJob;
+use App\Jobs\GenerateCatalog\GenerateCategoriesJob;
 use App\Models\BlogPosts;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\BlogPostsRepository;
@@ -41,7 +44,7 @@ class BlogPostController extends BaseController
             $item['hours'] = $item->created_at->hour;
             return $item;
         });
-        dd($result);
+
 
         return view('blog.admin.posts.index', compact('paginator'));
     }
@@ -67,8 +70,12 @@ class BlogPostController extends BaseController
     {
 
         $data = $request->input();
-        $item = new BlogPosts($data);
-        $item->save();
+        $item =  BlogPosts::create($data);
+
+        if($item) {
+            // dispatch(new BlogPostsCreatedJob($item)); //send to queue
+            BlogPostsCreatedJob::dispatch($item)->delay(20);
+        }
 
         if($item) return to_route('blog.admin.posts.edit', $item->id)
                             ->withInput()
@@ -144,7 +151,10 @@ class BlogPostController extends BaseController
         $result = BlogPosts::destroy($id);
         //delete from DB
         // $result = BlogPosts::withTrashed()->delete();
+
         if($result) {
+            BlogPostsDeletedJob::dispatch($id);
+            
             return to_route('blog.admin.posts.index')
                     ->with([
                             'success' => 'Успешно удалено',
@@ -156,6 +166,8 @@ class BlogPostController extends BaseController
     }
     }
 
+
+
     public function restore(string $trashedId)
     {
         $result = BlogPosts::withTrashed()->find($trashedId)->restore();
@@ -166,4 +178,16 @@ class BlogPostController extends BaseController
 
         else return back()->withErrors(['msg' => 'Что-то пошло не так']);
     }
+
+
+
+
+
+    public function testQueueChain()
+    {
+        GenerateCategoriesJob::dispatch();
+    }
+
+
+
 }
