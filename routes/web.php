@@ -58,7 +58,7 @@ Route::prefix('blog/admin')->group(function () {
 
 
 
-        Route::get('posts/prepare-catalog', [BlogPostController::class, 'testQueueChain'])
+        Route::get('posts/prepare-catalog', [BlogPostController::class, 'prepareCatalog'])
                                                 ->name('testqueuechain');
 
 });

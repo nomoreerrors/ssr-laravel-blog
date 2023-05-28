@@ -12,5 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class GenerateCatalogCacheJob extends AbstractJob
 {
 
+    //Логика помещения уже полученных данных из базы в кэш
+    //для использования другими задачами
  
 }

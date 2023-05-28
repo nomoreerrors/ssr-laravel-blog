@@ -1,0 +1,61 @@
+[2023-05-28 11:16:07] local.INFO: start!App\Jobs\GenerateCatalog\GenerateCatalogMainJob  
+[2023-05-28 11:16:07] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCatalogCacheJob  
+[2023-05-28 11:16:07] local.INFO: done!App\Jobs\GenerateCatalog\GenerateGoodsFileJob  
+[2023-05-28 11:16:07] local.INFO: это файлнум:1А это продуктнам:{"0":"Phone","Paper":"500$","chair":"100$"}  
+[2023-05-28 11:16:07] local.INFO: это файлнум:2А это продуктнам:{"sofa":"200$","table":"300$","TV":"5440$"}  
+[2023-05-28 11:16:07] local.INFO: это файлнум:3А это продуктнам:{"mouse":"100$","Computer":"200$","adapter":"540$"}  
+[2023-05-28 11:16:08] local.INFO: это файлнум:4А это продуктнам:{"pipe":"566$"}  
+[2023-05-28 11:16:08] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCategoriesJob  
+[2023-05-28 11:16:08] local.INFO: done!App\Jobs\GenerateCatalog\GenerateDeliveriesJob  
+[2023-05-28 11:16:08] local.INFO: done!App\Jobs\GenerateCatalog\GeneratePointsJob  
+[2023-05-28 11:16:08] local.INFO: done!App\Jobs\GenerateCatalog\ArchiveUploadsJob  
+[2023-05-28 11:16:08] local.INFO: done!App\Jobs\GenerateCatalog\SendPriceRequestJob  
+[2023-05-28 11:17:01] local.INFO: start!App\Jobs\GenerateCatalog\GenerateCatalogMainJob  
+[2023-05-28 11:17:01] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCatalogCacheJob  
+[2023-05-28 11:17:01] local.INFO: done!App\Jobs\GenerateCatalog\GenerateGoodsFileJob  
+[2023-05-28 11:17:01] local.INFO: это файлнум:1А это продуктнам:{"0":"Phone","Paper":"500$","chair":"100$"}  
+[2023-05-28 11:17:01] local.INFO: это файлнум:2А это продуктнам:{"sofa":"200$","table":"300$","TV":"5440$"}  
+[2023-05-28 11:17:01] local.INFO: это файлнум:3А это продуктнам:{"mouse":"100$","Computer":"200$","adapter":"540$"}  
+[2023-05-28 11:17:01] local.INFO: это файлнум:4А это продуктнам:{"pipe":"566$"}  
+[2023-05-28 11:17:02] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCategoriesJob  
+[2023-05-28 11:17:02] local.INFO: done!App\Jobs\GenerateCatalog\GenerateDeliveriesJob  
+[2023-05-28 11:17:02] local.INFO: done!App\Jobs\GenerateCatalog\GeneratePointsJob  
+[2023-05-28 11:17:02] local.INFO: done!App\Jobs\GenerateCatalog\ArchiveUploadsJob  
+[2023-05-28 11:17:02] local.INFO: done!App\Jobs\GenerateCatalog\SendPriceRequestJob  
+[2023-05-28 11:18:10] local.INFO: start!App\Jobs\GenerateCatalog\GenerateCatalogMainJob  
+[2023-05-28 11:18:10] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCatalogCacheJob  
+[2023-05-28 11:18:10] local.INFO: done!App\Jobs\GenerateCatalog\GenerateGoodsFileJob  
+[2023-05-28 11:36:41] local.INFO: start!App\Jobs\GenerateCatalog\GenerateCatalogMainJob  
+[2023-05-28 11:36:41] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCatalogCacheJob  
+[2023-05-28 11:36:41] local.INFO: done!App\Jobs\GenerateCatalog\GenerateGoodsFileJob  
+[2023-05-28 11:36:41] local.INFO: это файлнум:1А это продуктнам:{"0":"Phone","Paper":"500$","chair":"100$"}  
+[2023-05-28 11:36:42] local.INFO: это файлнум:2А это продуктнам:{"sofa":"200$","table":"300$","TV":"5440$"}  
+[2023-05-28 11:36:42] local.INFO: это файлнум:3А это продуктнам:{"mouse":"100$","Computer":"200$","adapter":"540$"}  
+[2023-05-28 11:36:42] local.INFO: это файлнум:4А это продуктнам:{"pipe":"566$"}  
+[2023-05-28 11:36:42] local.INFO: done!App\Jobs\GenerateCatalog\GenerateCategoriesJob  
+[2023-05-28 11:36:42] local.INFO: done!App\Jobs\GenerateCatalog\GenerateDeliveriesJob  
+[2023-05-28 11:36:42] local.INFO: done!App\Jobs\GenerateCatalog\GeneratePointsJob  
+[2023-05-28 11:36:42] local.INFO: done!App\Jobs\GenerateCatalog\ArchiveUploadsJob  
+[2023-05-28 11:36:43] local.INFO: done!App\Jobs\GenerateCatalog\SendPriceRequestJob  
+[2023-05-28 11:45:56] local.ERROR: The process "'/opt/homebrew/Cellar/php/8.2.5/bin/php' 'artisan' 'queue:work' '--once' '--name=default' '--queue=generate-catalog' '--backoff=0' '--memory=128' '--sleep=3' '--tries=3'" exceeded the timeout of 60 seconds. {"exception":"[object] (Symfony\\Component\\Process\\Exception\\ProcessTimedOutException(code: 0): The process \"'/opt/homebrew/Cellar/php/8.2.5/bin/php' 'artisan' 'queue:work' '--once' '--name=default' '--queue=generate-catalog' '--backoff=0' '--memory=128' '--sleep=3' '--tries=3'\" exceeded the timeout of 60 seconds. at /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/process/Process.php:1154)
+[stacktrace]
+#0 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/process/Process.php(423): Symfony\\Component\\Process\\Process->checkTimeout()
+#1 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/process/Process.php(249): Symfony\\Component\\Process\\Process->wait()
+#2 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Queue/Listener.php(179): Symfony\\Component\\Process\\Process->run(Object(Closure))
+#3 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Queue/Listener.php(90): Illuminate\\Queue\\Listener->runProcess(Object(Symfony\\Component\\Process\\Process), '128')
+#4 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Queue/Console/ListenCommand.php(74): Illuminate\\Queue\\Listener->listen(NULL, 'generate-catalo...', Object(Illuminate\\Queue\\ListenerOptions))
+#5 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Queue\\Console\\ListenCommand->handle()
+#6 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#7 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#8 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#9 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#10 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Console/Command.php(194): Illuminate\\Container\\Container->call(Array)
+#11 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/console/Command/Command.php(312): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#12 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Console/Command.php(163): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#13 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/console/Application.php(1040): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/console/Application.php(314): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\ListenCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(200): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 /Users/nomoreerrors/Documents/Afanasev-laravel/Laravel2000/laravel2000/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 {main}
+"} 

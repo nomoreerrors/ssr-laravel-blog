@@ -19,7 +19,8 @@ class AbstractJob implements ShouldQueue
      */
     public function __construct()
     {
-        $this->onQueue('generate-catalog'); //очередь по умолч.
+        $this->onQueue('generate-catalog');
+         //очередь по умолч. для всех связанных задач
     }
 
     /**
@@ -27,12 +28,16 @@ class AbstractJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->debug('done');
+        $this->debug('done!');
     }
 
-
+    /**
+     * Выводит название исполняемого класса в log
+     * с переданным аргументом
+     */
     protected function debug(string $msg): void
     {
+        
         $class = static::class;
         $msg = $msg . "{$class}"; 
         Log::info($msg);

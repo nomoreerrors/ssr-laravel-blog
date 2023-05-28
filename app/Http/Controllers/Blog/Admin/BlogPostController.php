@@ -9,11 +9,13 @@ use Illuminate\Support\Str;
 use App\Http\Requests\BlogPostUpdateRequest;
 use App\Jobs\BlogPostsCreatedJob;
 use App\Jobs\BlogPostsDeletedJob;
+use App\Jobs\GenerateCatalog\GenerateCatalogMainJob;
 use App\Jobs\GenerateCatalog\GenerateCategoriesJob;
 use App\Models\BlogPosts;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\BlogPostsRepository;
 use Illuminate\Support\Carbon;
+use App\Jobs\GenerateCatalog\GeneratePricesFileChunkJob;
 use App\Repositories\BlogCategoryRepository;
 
 class BlogPostController extends BaseController
@@ -30,6 +32,30 @@ class BlogPostController extends BaseController
      */
     public function index()
     {
+        // $products = collect([
+        //     'Phone',
+        //     'Paper' => '500$'
+        //     ,'chair' => '100$'
+        //     ,'sofa' => '200$'
+        //     ,'table' => '300$'
+        //     ,'TV' => '5440$'
+        //     ,'mouse' => '100$'
+        //     ,'Computer' => '200$'
+        //     ,'adapter' => '540$'
+        //     ,'pipe' => '566$'
+        // ]);
+
+        //     $fileNum = 1;
+
+        //     foreach ($products->chunk(3) as $product) {
+        //     $result[] = new GeneratePricesFileChunkJob($product, $fileNum);
+        //     $fileNum++;
+        //     //Разбиваем большой файл с ценами товаров на несколько
+        //     //Получаем массив экземпляров класса в $result
+        //     }
+        // dd($result);
+    
+
         $paginator = BlogPostsRepository::getAllWithPaginate(15);
 
         $collection = collect(BlogPosts::all());
@@ -182,10 +208,13 @@ class BlogPostController extends BaseController
 
 
 
+    /**
+     * Testing queue chain
+     */
 
-    public function testQueueChain()
+    public function prepareCatalog()
     {
-        GenerateCategoriesJob::dispatch();
+        GenerateCatalogMainJob::dispatch();
     }
 
 
